@@ -139,18 +139,20 @@
       const separateData = (csv) => {
         const normal = csv.filter(
           (csvRow) =>
+            !csvRow["運用状況"]=='廃止' &&
             !csvRow["要講習"] &&
             !csvRow["TAの立ち会い"] &&
             !csvRow["教員の立ち会い"]
         );
         const need = csv.filter(
           (csvRow) =>
+            !csvRow["運用状況"]=='廃止' &&
             csvRow["要講習"] &&
             !csvRow["TAの立ち会い"] &&
             !csvRow["教員の立ち会い"]
         );
-        const ta = csv.filter((d) => d["TAの立ち会い"]);
-        const teacher = csv.filter((d) => d["教員の立ち会い"]);
+        const ta = csv.filter((d) => !csvRow["運用状況"]=='廃止' && d["TAの立ち会い"]);
+        const teacher = csv.filter((d) => !csvRow["運用状況"]=='廃止' && d["教員の立ち会い"]);
 
         const data = { normal, need, ta, teacher, all: csv };
         return data;
