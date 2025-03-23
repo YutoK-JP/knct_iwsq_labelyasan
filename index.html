@@ -52,6 +52,10 @@
             <a id="teacher-dl" class="inactive" download="教員の立ち会いが必要なもの.csv" href="#">ダウンロード</a>
         </li>
         <li>
+            両方の立ち会いが必要なもの
+            <a id="both-dl" class="inactive" download="両方の立ち会いが必要なもの.csv" href="#">ダウンロード</a>
+        </li>
+        <li>
             すべて
             <a id="all-dl" class="inactive" download="すべて.csv" href="#">ダウンロード</a>
         </li>
@@ -134,8 +138,9 @@
             );
             const ta = csv.filter((d) => !csvRow["運用状況"] == '廃止' && d["TAの立ち会い"]);
             const teacher = csv.filter((d) => !csvRow["運用状況"] == '廃止' && d["教員の立ち会い"]);
+            const both = csv.filter((d) => !csvRow["運用状況"] == '廃止' && d["TAの立ち会い"] && d["教員の立ち会い"]);
 
-            const data = { normal, need, ta, teacher, all: csv };
+            const data = { normal, need, ta, teacher, both, all: csv };
             return data;
         };
 
@@ -194,18 +199,20 @@
                 if (!isValid) return;
 
                 const addedImagesCSV = addImageFilePathToCSV(csv, fullPathEl.value);
-                const { normal, need, ta, teacher, all } = separateData(csv);
+                const { normal, need, ta, teacher, both, all } = separateData(csv);
                 // console.log(ta);
                 const normalCsv = Papa.unparse(normal, { quotes: true });
                 const needCsv = Papa.unparse(need, { quotes: true });
                 const taCsv = Papa.unparse(ta, { quotes: true });
                 const teacherCsv = Papa.unparse(teacher, { quotes: true });
+                const bothCsv = Papa.unparse(both, { quotes: true });
                 const allCsv = Papa.unparse(all, { quotes: true });
 
                 handleDownload(normalCsv, "normal-dl");
                 handleDownload(needCsv, "need-dl");
                 handleDownload(taCsv, "ta-dl");
                 handleDownload(teacherCsv, "teacher-dl");
+                handleDownload(bothCsv, "both-dl");
                 handleDownload(allCsv, "all-dl");
             });
         })();
