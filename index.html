@@ -156,11 +156,11 @@
             const result = equipments.difference(new Set(localFilenames));
             if (result.size !== 0) {
                 statusEl.textContent =
-                    "次の画像ファイルがありません。用意した後にページを更新し再度実行してください。";
+                    "次の画像ファイルがありません。";
                 bodyEl.textContent = Array.from(result.values())
                     .map((v) => "・" + v)
                     .join("\n");
-                return false;
+                return true;
             }
 
             statusEl.textContent = "問題ありません。";
