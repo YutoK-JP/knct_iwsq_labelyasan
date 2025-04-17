@@ -102,8 +102,10 @@
                         csvRow["TAの立ち会い"] === "TRUE" ? "TAの立ち会い" : "";
                     csvRow["教員の立ち会い"] =
                         csvRow["教員の立ち会い"] === "TRUE" ? "教員の立ち会い" : "";
-
+                    csvRow["運用状況"] =
+                        csvRow["運用状況"] === "廃止" ? "廃止" : "";
                     csvRow["ScrapboxのURL"] = "ScrapboxのURL";
+                    
                     csvRow["使い方"] = "";
                     return csvRow;
                 });
